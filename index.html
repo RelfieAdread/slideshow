@@ -18,7 +18,7 @@
       max-width: 100%;
       max-height: 100%;
       opacity: 0;
-      transition: opacity 1s ease-in-out; /* フェードイン/アウトの効果 */
+      transition: opacity 1s ease-in-out;
     }
     img.active {
       opacity: 1;
@@ -37,14 +37,35 @@
 <script>
   let currentIndex = 0;
   const images = document.querySelectorAll("img");
-  const displayTime = 4000;  // 写真表示の時間 (ミリ秒)
-  const fadeDuration = 1000; // フェード効果の長さ (ミリ秒)
+  const displayTime = 3000;  // 自動スライドの表示時間（ミリ秒）
 
+  // 自動でスライドショーを切り替え
   setInterval(() => {
+    goToNextImage();
+  }, displayTime);
+
+  // 次の画像に移動
+  function goToNextImage() {
     images[currentIndex].classList.remove("active");
     currentIndex = (currentIndex + 1) % images.length;
     images[currentIndex].classList.add("active");
-  }, displayTime);
+  }
+
+  // 前の画像に移動
+  function goToPreviousImage() {
+    images[currentIndex].classList.remove("active");
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    images[currentIndex].classList.add("active");
+  }
+
+  // キーボードの左右矢印キーで前後に移動
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      goToNextImage();
+    } else if (event.key === "ArrowLeft") {
+      goToPreviousImage();
+    }
+  });
 </script>
 
 </body>
