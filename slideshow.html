@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Photo Slideshow</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      overflow: hidden;
+    }
+    img {
+      position: absolute;
+      max-width: 100%;
+      max-height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out; /* フェードイン/アウトの効果 */
+    }
+    img.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<img src="photo1.jpg" class="active">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+<img src="photo6.jpg">
+
+<script>
+  let currentIndex = 0;
+  const images = document.querySelectorAll("img");
+  const displayTime = 3000;  // 写真表示の時間 (ミリ秒)
+  const fadeDuration = 1000; // フェード効果の長さ (ミリ秒)
+
+  setInterval(() => {
+    images[currentIndex].classList.remove("active");
+    currentIndex = (currentIndex + 1) % images.length;
+    images[currentIndex].classList.add("active");
+  }, displayTime);
+</script>
+
+</body>
+</html>
